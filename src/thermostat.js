@@ -1,7 +1,8 @@
 'use strict';
 
 function Thermostat() {
-  this.temperature = 20
+  this.MINIMUM_TEMPERATURE = 10;
+  this.temperature = 20;
 }
 
 Thermostat.prototype.getCurrentTemperature = function() {
@@ -13,5 +14,12 @@ Thermostat.prototype.increase = function() {
 };
 
 Thermostat.prototype.decrease = function() {
+  if (this.isMinimumTemperature()) {
+    return;
+  }
   this.temperature -= 1;
 };
+
+Thermostat.prototype.isMinimumTemperature = function() {
+  return this.temperature === this.MINIMUM_TEMPERATURE;
+}
