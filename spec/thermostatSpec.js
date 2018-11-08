@@ -44,6 +44,14 @@ describe('thermostat', function() {
     expect(thermostat.isPowerSavingModeOn()).toBe(true);
   });
 
+  it('can reset to default temperature', function() {
+    for (var i = 0; i < 6; i++) {
+      thermostat.increase();
+    }
+    thermostat.resetTemperature();
+    expect(thermostat.getCurrentTemperature()).toEqual(20);
+  });
+
   describe('if power saving mode is switched on', function() {
     it('the maximum temperature is 25 degrees', function() {
       for(var i = 0; i < 6; i++) {

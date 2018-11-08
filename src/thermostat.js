@@ -1,6 +1,8 @@
 'use strict';
 
 function Thermostat() {
+  this.DEFAULT_TEMPERATURE = 20;
+  this.temperature = this.DEFAULT_TEMPERATURE;
   this.MAX_LIMIT_PSM_ON = 25;
   this.MAX_LIMI_PSM_OFF = 32;
   this.powerSavingMode = true;
@@ -47,4 +49,8 @@ Thermostat.prototype.turnPowerSavingModeOff = function() {
 
 Thermostat.prototype.turnPowerSavingModeOn = function() {
  this.powerSavingMode = true;
+}
+
+Thermostat.prototype.resetTemperature = function () {
+  this.temperature = this.DEFAULT_TEMPERATURE;
 }
