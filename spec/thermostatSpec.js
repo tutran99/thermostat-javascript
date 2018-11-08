@@ -33,14 +33,34 @@ describe('thermostat', function() {
   });
 
   it('can turn off power saving mode', function() {
-    thermostat.switchPowerSavingModeOff();
+    thermostat.turnPowerSavingModeOff();
     expect(thermostat.isPowerSavingModeOn()).toBe(false);
   });
 
   it('can turn power saving mode back on', function() {
-    thermostat.switchPowerSavingModeOff();
+    thermostat.turnPowerSavingModeOff();
     expect(thermostat.isPowerSavingModeOn()).toBe(false);
-    thermostat.switchPowerSavingModeOn();
+    thermostat.turnPowerSavingModeOn();
     expect(thermostat.isPowerSavingModeOn()).toBe(true);
   });
+
+  describe('if power saving mode is switched on', function() {
+    it('the maximum temperature is 25 degrees', function() {
+      for(var i = 0; i < 6; i++) {
+        thermostat.increase();
+      }
+      expect(thermostat.getCurrentTemperature()).toEqual(25)
+    });
+  });
+
+  describe('if power saving mode is switched off', function() {
+    it('the maximum temperature is 32 degrees', function() {
+      thermostat.turnPowerSavingModeOff();
+      for(var i = 0; i < 13; i++) {
+        thermostat.increase();
+      }
+      expect(thermostat.getCurrentTemperature()).toEqual(32);
+    });
+  });
+
 });
