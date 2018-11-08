@@ -71,4 +71,31 @@ describe('thermostat', function() {
     });
   });
 
+  describe('energy usage', function() {
+    describe('when temperature is less than 18 degrees', function() {
+      it('is defined as low-usage', function() {
+        for (var i = 0; i < 3; i++) {
+          thermostat.decrease();
+      }
+      expect(thermostat.energyUsage()).toEqual('low-usage');
+      });
+    });
+  
+    describe('when temperature is between 18 and 25 degrees', function() {
+      it('is defined as medium-usage', function() {
+        expect(thermostat.energyUsage()).toEqual('medium-usage');
+      });
+    });
+  
+    describe('when temperature is anything else', function() {
+      it('is defined as high-usage', function() {
+        thermostat.powerSavingMode = false;
+        for (var i = 0; i < 6; i++) {
+          thermostat.increase();
+        }
+        expect(thermostat.energyUsage()).toEqual('high-usage');
+      });
+    });
+  });
+
 });
